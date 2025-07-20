@@ -7,7 +7,8 @@ export const useVans = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
-	useEffect(() => {
+	const fetchVans = async () => {
+		setLoading(true);
 		api
 			.get("/vans")
 			.then((res) => setVans(res.data))
@@ -17,7 +18,12 @@ export const useVans = () => {
 					setLoading(false);
 				}, 1000),
 			);
+	};
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		fetchVans();
 	}, []);
 
-	return { vans, loading, error };
+	return { vans, loading, error, fetchVans, setLoading };
 };

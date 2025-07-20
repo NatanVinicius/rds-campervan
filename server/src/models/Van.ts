@@ -12,6 +12,7 @@ export const Van = model(
 				type: String,
 				required: false,
 			},
+			features: { type: String, required: true },
 			price: {
 				type: Number,
 				required: true,
@@ -19,16 +20,15 @@ export const Van = model(
 
 			coverImage: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			details: {
 				type: {
 					kilometersDetail: { type: Number, required: true },
 					capacityDetail: { type: Number, required: true },
 					city: { type: String, required: true },
-					features: { type: String, required: true },
 					newOrUsed: { type: String, required: true },
-					imagesDetail: [{ type: String, required: true }],
+					imagesDetail: [{ type: String, required: false }],
 				},
 			},
 		},

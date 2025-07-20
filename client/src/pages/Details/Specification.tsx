@@ -19,7 +19,7 @@ export const Specifications = ({ optionsDesc, title }: SpecificationsProps) => {
 				{optionsDesc.split("\n").map((item, index) => (
 					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 					<p key={index} className="text-start">
-						{">"} {item}
+						{item}
 					</p>
 				))}
 			</div>

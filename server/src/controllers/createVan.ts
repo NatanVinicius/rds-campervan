@@ -14,6 +14,8 @@ export const createVan = async (req: Request, res: Response) => {
 			newOrUsed,
 		} = req.body;
 
+		console.log(req.files);
+
 		//coverimage
 		const coverImage =
 			req.files &&
@@ -31,6 +33,7 @@ export const createVan = async (req: Request, res: Response) => {
 		if (
 			!name ||
 			!price ||
+			!description ||
 			!coverImage ||
 			!features ||
 			!city ||
@@ -39,20 +42,20 @@ export const createVan = async (req: Request, res: Response) => {
 			!imagesDetail ||
 			!newOrUsed
 		) {
-			res.status(400).json({ error: "Missing required fields" });
+			res.status(400).json({ error: "All field is required" });
 			return;
 		}
 
 		const newVan = await Van.create({
 			name,
 			description,
+			features,
 			price,
 			coverImage,
 			details: {
 				kilometersDetail: Number(kilometersDetail),
 				capacityDetail: Number(capacityDetail),
 				city: String(city),
-				features,
 				newOrUsed: String(newOrUsed),
 				imagesDetail,
 			},

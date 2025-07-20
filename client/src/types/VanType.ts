@@ -1,14 +1,15 @@
 export interface VanType {
-	id: number;
+	_id?: string;
 	name: string;
-	description: string;
 	price: number;
-	coverImage: string;
+	description: string;
+	features: string;
+	coverImage: File | "";
 	details: {
 		kilometersDetail: number;
-		features: string;
 		city: string;
 		capacityDetail: number;
-		imagesDetail: string[];
+		newOrUsed: string;
+		imagesDetail: File[] | [];
 	};
 }
