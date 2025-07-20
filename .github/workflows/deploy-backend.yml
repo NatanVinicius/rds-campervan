@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps: 
-      - names: Checkout node
+      - name: Checkout node
         uses: actions/checkout@v3
 
       - name: Authenticate to Google Cloud
