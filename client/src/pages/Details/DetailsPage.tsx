@@ -6,26 +6,12 @@ import { Link } from "react-router-dom";
 import { CarouselVans } from "./CarouselVans";
 import { Specifications } from "./Specification";
 import selfContainedImg from "../../assets/self-contained-img.png";
-
-type Van = {
-	id: number;
-	name: string;
-	description: string;
-	price: number;
-	coverImage: string;
-	details: {
-		kilometersDetail: number;
-		capacityDetail: number;
-		city: string;
-		features: string;
-		imagesDetail: string[];
-	};
-};
+import type { VanType } from "../../types/VanType";
 
 export const DetailsPage = () => {
-	const [van, setVan] = useState<Van | null>(null);
+	const [van, setVan] = useState<VanType | null>(null);
 	const location = useLocation();
-	const state = location.state as { item: Van };
+	const state = location.state as { item: VanType };
 
 	useEffect(() => {
 		if (state?.item) {
@@ -47,7 +33,15 @@ export const DetailsPage = () => {
 					</div>
 				</div>
 				<div className="mt-6">
-					<CarouselVans images={van?.details.imagesDetail ?? []} />
+					<CarouselVans
+						images={
+							van?.details.imagesDetail
+								? van.details.imagesDetail.map((file) =>
+										typeof file === "string" ? file : URL.createObjectURL(file),
+									)
+								: []
+						}
+					/>
 				</div>
 				<div className="text-center">
 					<p className="text-2xl font-semibold py-6">Specifications</p>
@@ -58,7 +52,7 @@ export const DetailsPage = () => {
 						/>
 						<Specifications
 							title={"Features"}
-							optionsDesc={van?.details?.features ?? ""}
+							optionsDesc={van?.features || ""}
 						/>
 					</div>
 				</div>

@@ -46,7 +46,13 @@ export const VansContent = () => {
 								className="bg-[#f5f5f5] shadow-md rounded-2xl hover:scale-101 hover:shadow-2xl duration-400"
 							>
 								<img
-									src={van.coverImage}
+									src={
+										typeof van.coverImage === "string"
+											? van.coverImage
+											: van.coverImage
+												? URL.createObjectURL(van.coverImage)
+												: undefined
+									}
 									alt=""
 									className="w-full h-[260px] rounded-t-2xl"
 								/>
@@ -65,13 +71,13 @@ export const VansContent = () => {
 											<span>
 												<FaMapMarkerAlt />
 											</span>
-											<p>{van.details.capacityDetail}</p>
+											<p>{van.details.city}</p>
 										</div>
 										<div className="flex items-center gap-2 text-lg">
 											<span>
 												<IoIosPeople />
 											</span>
-											<p>{van.details.city}</p>
+											<p>{van.details.capacityDetail}</p>
 										</div>
 									</div>
 								</div>

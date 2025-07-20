@@ -42,10 +42,6 @@ export const CarouselVans = ({ images }: CarouselVansProps) => {
 		setModalImage((prev) => !prev);
 	};
 
-	useEffect(() => {
-		console.log(items);
-	});
-
 	return (
 		<>
 			{modalImage && (
