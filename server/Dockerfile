@@ -15,7 +15,7 @@ RUN npm install --legacy-peer-deps --include=dev
 COPY . .
 
 # Expõe a porta que o app vai rodar
-EXPOSE 3000
+EXPOSE 8080
 
 # Comando para iniciar a aplicação
 CMD ["npm", "run", "dev"]

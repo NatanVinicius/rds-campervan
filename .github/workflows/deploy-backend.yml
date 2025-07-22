@@ -1,35 +1,54 @@
-name: Deploy Backend to Google Cloud Run
+name: CI/CD ‑ Deploy Backend to Cloud Run
 
-on: 
+on:
   push:
-    branches: 
+    branches:
       - main
     paths:
-      - "server/**"
+      - 'server/**'
+      - 'terraform/**'
 
-jobs: 
-  build-and-deploy: 
-    name: Build and Deploy Backend
+jobs:
+  deploy:
+    name: Build & Deploy Backend
     runs-on: ubuntu-latest
+    steps:
 
-    steps: 
-      - name: Checkout node
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v2
-        with: 
-          credentials_json: $({ secrets.GCP_SA_KEY })
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
 
-      - name: Configure Docker for Artifact Registry
-        run: gcloud auth configure-docker $({ secrets.GCP_REGION })-docker-pkg.dev
+      - name: Configure Docker auth for Artifact Registry
+        run: |
+          gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/campervan-backend/backend:latest ./backend
-      
-      - name: Push Docker image to Artifact Registry
+          docker build \
+            -t ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/campervan-backend/backend:latest \
+            ./server
+
+      - name: Push Docker image
         run: |
           docker push ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/campervan-backend/backend:latest
-   
-        
+
+      - name: Terraform Init
+        working-directory: deploy/terraform
+        run: terraform init -input=false
+
+      - name: Terraform Apply
+        working-directory: deploy/terraform
+        env:
+          GOOGLE_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
+          GOOGLE_REGION:  ${{ secrets.GCP_REGION }}
+        run: |
+          terraform apply -auto-approve \
+            -var="project_id=${{ secrets.GCP_PROJECT_ID }}" \
+            -var="region=${{ secrets.GCP_REGION }}" \
+            -var="mongo_user=${{ secrets.MONGO_USER }}" \
+            -var="mongo_password=${{ secrets.MONGO_PASSWORD }}"
