@@ -4,7 +4,9 @@ WORKDIR /app
 
 COPY package.json package-lock.json* ./
 
-RUN npm install
+RUN npm install --include=dev
+RUN chmod +x ./node_modules/.bin/tsc
+
 
 COPY . .
 
