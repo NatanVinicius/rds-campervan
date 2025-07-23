@@ -10,7 +10,7 @@
 		"esModuleInterop": true,
 
 		/* Bundler mode */
-		"moduleResolution": "node10",
+		"moduleResolution": "node",
 		"allowImportingTsExtensions": true,
 		"verbatimModuleSyntax": true,
 		"moduleDetection": "force",

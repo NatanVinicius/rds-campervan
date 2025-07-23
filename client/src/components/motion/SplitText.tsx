@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from "react";
+import type React from "react";
+import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText as GSAPSplitText } from "gsap/SplitText";
@@ -16,7 +17,6 @@ export interface SplitTextProps {
 	to?: gsap.TweenVars;
 	threshold?: number;
 	rootMargin?: string;
-	textAlign?: React.CSSProperties["textAlign"];
 	onLetterAnimationComplete?: () => void;
 }
 
@@ -31,12 +31,12 @@ const SplitText: React.FC<SplitTextProps> = ({
 	to = { opacity: 1, y: 0 },
 	threshold = 0.1,
 	rootMargin = "-100px",
-	textAlign = "center",
 	onLetterAnimationComplete,
 }) => {
 	const ref = useRef<HTMLParagraphElement>(null);
 	const animationCompletedRef = useRef(false);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		const el = ref.current;
 		if (!el || animationCompletedRef.current) return;
@@ -65,13 +65,14 @@ const SplitText: React.FC<SplitTextProps> = ({
 				targets = splitter.chars;
 		}
 
+		// biome-ignore lint/complexity/noForEach: <explanation>
 		targets.forEach((t) => {
 			(t as HTMLElement).style.willChange = "transform, opacity";
 		});
 
 		const startPct = (1 - threshold) * 100;
 		const m = /^(-?\d+)px$/.exec(rootMargin);
-		const raw = m ? parseInt(m[1], 10) : 0;
+		const raw = m ? Number.parseInt(m[1], 10) : 0;
 		const sign = raw < 0 ? `-=${Math.abs(raw)}px` : `+=${raw}px`;
 		const start = `top ${startPct}%${sign}`;
 
@@ -105,6 +106,7 @@ const SplitText: React.FC<SplitTextProps> = ({
 
 		return () => {
 			tl.kill();
+			// biome-ignore lint/complexity/noForEach: <explanation>
 			ScrollTrigger.getAll().forEach((t) => t.kill());
 			gsap.killTweensOf(targets);
 			splitter.revert();

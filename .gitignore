@@ -5,5 +5,6 @@
 *.tfplan
 terraform/terraform.tfvars
 terraform.tfvars
+terraform/frontend/terraform.tfvars
 
 
