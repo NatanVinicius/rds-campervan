@@ -4,11 +4,11 @@ on:
   push:
     branches: [main]
     paths:
-      - "frontend/**"
+      - "client/**"
       - ".github/workflows/deploy-frontend.yml"
-      - "frontend/Dockerfile"
-      - "frontend/package.json"
-      - "frontend/package-lock.json"
+      - "client/Dockerfile"
+      - "client/package.json"
+      - "client/package-lock.json"
 
 jobs:
   deploy:
@@ -30,7 +30,7 @@ jobs:
       - name: Build and Push Docker image
         run: |
           IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/rdscampervan/frontend:${{ github.sha }}
-          docker build -t $IMAGE_TAG ./frontend
+          docker build -t $IMAGE_TAG ./client
           docker push $IMAGE_TAG
 
       - name: Deploy to Cloud Run
