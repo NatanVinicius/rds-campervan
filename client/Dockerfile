@@ -1,18 +1,22 @@
-# client/Dockerfile.dev
-
-FROM node:20
+FROM node:20 AS builder
 
 WORKDIR /app
 
-# Copia apenas os arquivos essenciais primeiro (para cache)
 COPY package.json package-lock.json* ./
 
 RUN npm install
 
-# Copia o restante do projeto
 COPY . .
 
-# Expor a porta do Vite
-EXPOSE 5173
+RUN npm run build
 
-CMD ["npm", "run", "dev", "--", "--host"]
+FROM nginx:stable-alpine
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Copia o nginx.conf customizado para substituir o padrão
+COPY nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
