@@ -17,8 +17,6 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: List node_modules/.bin permissions
-        run: ls -la ./client/node_modules/.bin
 
       - name: Fix permissions
         run: chmod -R +x ./client/node_modules/.bin
