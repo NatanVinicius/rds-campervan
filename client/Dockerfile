@@ -3,28 +3,31 @@ FROM node:20 AS builder
 
 WORKDIR /app
 
-# Copia package.json e yarn.lock para instalar dependências
+# Copia arquivos de dependências
 COPY package.json yarn.lock ./
 
-# Instala dependências com Yarn usando lockfile congelado
+# Instala todas as dependências (prod + dev)
 RUN yarn install --frozen-lockfile
 
-# Copia o restante do código
+# Copia todo o código
 COPY . .
 
-# Roda o build
-RUN yarn build
+# Dá permissão para o tsc (TypeScript compiler) executar
+RUN chmod +x ./node_modules/.bin/tsc
+
+# Roda build do TypeScript e Vite
+RUN yarn tsc -b && yarn vite build
 
 # Stage 2: Servir com Nginx
 FROM nginx:stable-alpine
 
-# Remove arquivos default do nginx
+# Remove conteúdo padrão do nginx
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copia build gerado do stage anterior
+# Copia build do frontend
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Copia seu nginx.conf customizado (se tiver)
+# Copia configuração customizada do nginx
 COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
