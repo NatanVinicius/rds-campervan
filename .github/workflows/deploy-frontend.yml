@@ -1,5 +1,6 @@
 name: Deploy Frontend to Cloud Run
 
+
 on:
   push:
     branches: [main]
@@ -11,10 +12,17 @@ on:
       - "client/yarn.lock"
 
 jobs:
+  
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
+      - name: List node_modules/.bin permissions
+        run: ls -la ./client/node_modules/.bin
+
+      - name: Fix permissions
+        run: chmod -R +x ./client/node_modules/.bin
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -30,17 +38,17 @@ jobs:
 
       - name: Build Docker image
         run: |
-          IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/rdscampervan/frontend:${{ github.sha }}
+          IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/rdscampervans/frontend:${{ github.sha }}
           docker build -t $IMAGE_TAG ./client
 
       - name: Push Docker image to Artifact Registry
         run: |
-          IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/rdscampervan/frontend:${{ github.sha }}
+          IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/rdscampervans/frontend:${{ github.sha }}
           docker push $IMAGE_TAG
 
       - name: Deploy to Cloud Run
         run: |
-          IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/rdscampervan/frontend:${{ github.sha }}
+          IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/rdscampervans/frontend:${{ github.sha }}
           gcloud run deploy rdscampervan-frontend \
             --image=$IMAGE_TAG \
             --platform=managed \
@@ -48,3 +56,4 @@ jobs:
             --allow-unauthenticated \
             --port=80 \
             --memory=512Mi
+ 
