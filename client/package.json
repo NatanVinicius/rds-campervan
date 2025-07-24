@@ -3,12 +3,9 @@
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
-	"resolutions": {
-		"picomatch": "^4.0.3"
-	},
 	"scripts": {
 		"dev": "vite",
-		"build": "tsc -b && vite build",
+		"build": "yarn run tsc -b && yarn run vite build",
 		"lint": "eslint .",
 		"preview": "vite preview --port 80"
 	},
