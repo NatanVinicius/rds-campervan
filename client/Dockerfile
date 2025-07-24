@@ -5,7 +5,6 @@ WORKDIR /app
 
 COPY package.json yarn.lock ./
 
-RUN chmod -R +x ./node_modules/.bin
 RUN yarn install --frozen-lockfile
 RUN yarn global add typescript vite
 RUN yarn build
