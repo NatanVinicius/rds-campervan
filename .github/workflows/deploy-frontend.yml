@@ -18,9 +18,6 @@ jobs:
 
     steps:
 
-      - name: Fix permissions
-        run: chmod -R +x ./client/node_modules/.bin
-
       - name: Checkout code
         uses: actions/checkout@v4
 
