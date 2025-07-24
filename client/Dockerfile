@@ -1,30 +1,30 @@
-# Etapa de build
+# Stage 1: Build
 FROM node:20 AS builder
 
 WORKDIR /app
 
-# Copia os arquivos de dependências
-COPY package.json package-lock.json ./
+# Copia package.json e yarn.lock para instalar dependências
+COPY package.json yarn.lock ./
 
-# Instala dependências
-RUN npm ci
+# Instala dependências com Yarn usando lockfile congelado
+RUN yarn install --frozen-lockfile
 
-# Copia o restante do projeto
+# Copia o restante do código
 COPY . .
 
-# Executa o build (sem usar npx)
-RUN npm run build
+# Roda o build
+RUN yarn build
 
-# Etapa final com nginx
+# Stage 2: Servir com Nginx
 FROM nginx:stable-alpine
 
-# Remove o conteúdo padrão do nginx
+# Remove arquivos default do nginx
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copia os arquivos gerados no build
+# Copia build gerado do stage anterior
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Copia a configuração customizada do nginx
+# Copia seu nginx.conf customizado (se tiver)
 COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
