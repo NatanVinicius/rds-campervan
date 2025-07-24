@@ -2,17 +2,16 @@
 FROM node:20 AS builder
 
 WORKDIR /app
-
+ 
 COPY package.json yarn.lock ./
 
 RUN yarn install --frozen-lockfile
 RUN yarn global add typescript vite
-RUN yarn build
 
 
 COPY . .
 
-RUN yarn build
+RUN yarn buildd
 
 # Stage 2: Serve with nginx
 FROM nginx:stable-alpine
