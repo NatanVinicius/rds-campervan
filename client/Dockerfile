@@ -11,7 +11,7 @@ RUN yarn global add typescript vite
 
 COPY . .
 
-RUN yarn buildd
+RUN yarn build
 
 # Stage 2: Serve with nginx
 FROM nginx:stable-alpine
