@@ -8,7 +8,7 @@ on:
       - ".github/workflows/deploy-frontend.yml"
       - "client/Dockerfile"
       - "client/package.json"
-      - "client/package-lock.json"
+      - "client/yarn.lock"
 
 jobs:
   deploy:
@@ -27,9 +27,6 @@ jobs:
 
       - name: Authenticate Docker with Google Artifact Registry
         run: gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev
-
-      - name: List files in client (debug)
-        run: ls -la ./client
 
       - name: Build Docker image
         run: |
