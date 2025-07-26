@@ -41,12 +41,6 @@ jobs:
           IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend
           docker build -t $IMAGE_TAG ./client
 
-      # ✅ Criar .env dinâmico com a variável de ambiente
-      - name: Create .env file
-        run: |
-          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" > ./client/.env
-          cat ./client/.env
-
       # ✅ Push para o Artifact Registry
       - name: Push Docker image to Artifact Registry
         run: |
