@@ -42,8 +42,10 @@ jobs:
       # ✅ Build da imagem 
       - name: Build Docker image
         run: |
-              IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend
-              docker build -t $IMAGE_TAG ./client
+            IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend
+            docker build \
+              --build-arg VITE_API_URL=https://www.rdscampervan.co.nz/api \
+              -t $IMAGE_TAG ./client
 
       # ✅ Push para o Artifact Registry
       - name: Push Docker image to Artifact Registry
