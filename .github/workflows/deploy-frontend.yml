@@ -10,7 +10,7 @@ on:
       - "client/Dockerfile"
       - "client/package.json"
       - "client/yarn.lock"
-
+ 
 jobs:
   
   deploy:
