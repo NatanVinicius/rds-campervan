@@ -18,19 +18,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # ✅ Autenticar com a conta de serviço (NOVIDADE!)
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
+      # ✅ Instalar e configurar gcloud
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           install_components: 'beta'
 
+      # ✅ Autenticar Docker com o Artifact Registry
       - name: Authenticate Docker with Google Artifact Registry
         run: gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev
+
+      # ✅ Build da imagem
+      - name: Build Docker image
+        run: |
+          IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend
+          docker build -t $IMAGE_TAG ./client
 
       # ✅ Criar .env dinâmico com a variável de ambiente
       - name: Create .env file
@@ -38,17 +47,13 @@ jobs:
           echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" > ./client/.env
           cat ./client/.env
 
-      # ✅ Build Docker image com o .env já incluso
-      - name: Build Docker image
-        run: |
-          IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend
-          docker build -t $IMAGE_TAG ./client
-
+      # ✅ Push para o Artifact Registry
       - name: Push Docker image to Artifact Registry
         run: |
           IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend
           docker push $IMAGE_TAG
 
+      # ✅ Deploy no Cloud Run
       - name: Deploy to Cloud Run
         run: |
           IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend
@@ -57,5 +62,5 @@ jobs:
             --platform=managed \
             --region=${{ secrets.GCP_REGION }} \
             --allow-unauthenticated \
-            --port=80 \ 
+            --port=80 \
             --memory=512Mi
