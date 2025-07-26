@@ -10,7 +10,6 @@ RUN yarn global add typescript vite
 
 
 COPY . .
-COPY .env .env ./
 
 RUN yarn build
 
