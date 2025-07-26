@@ -1,6 +1,5 @@
 name: Deploy Frontend to Cloud Run
 
-
 on:
   push:
     branches: [main]
@@ -10,40 +9,48 @@ on:
       - "client/Dockerfile"
       - "client/package.json"
       - "client/yarn.lock"
- 
+
 jobs:
-  
   deploy:
-    runs-on: ubuntu-22.04 
+    runs-on: ubuntu-22.04
 
     steps:
-
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # ✅ Autenticar com a conta de serviço (NOVIDADE!)
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      # ✅ Instalar e configurar gcloud
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          export_default_credentials: true
+          install_components: 'beta'
 
+      # ✅ Autenticar Docker com o Artifact Registry
       - name: Authenticate Docker with Google Artifact Registry
         run: gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev
 
+      # ✅ Build da imagem
       - name: Build Docker image
         run: |
-          IMAGE_TAG=us-central1-docker.pkg.dev/rds-campervan-cloud/campervans-frontend
+          IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend
           docker build -t $IMAGE_TAG ./client
 
+      # ✅ Push para o Artifact Registry
       - name: Push Docker image to Artifact Registry
         run: |
-          IMAGE_TAG=us-central1-docker.pkg.dev/rds-campervan-cloud/campervans-frontend
+          IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend
           docker push $IMAGE_TAG
 
+      # ✅ Deploy no Cloud Run
       - name: Deploy to Cloud Run
         run: |
-          IMAGE_TAG=us-central1-docker.pkg.dev/rds-campervan-cloud/campervans-frontend
+          IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend
           gcloud run deploy rdscampervan-frontend \
             --image=$IMAGE_TAG \
             --platform=managed \
