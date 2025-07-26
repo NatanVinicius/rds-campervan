@@ -36,20 +36,18 @@ jobs:
         run: gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev
 
       # ✅ Build da imagem com VITE_API_URL
-      - name: Build Docker image with VITE_API_URL
+      - name: Build Docker image
         run: |
-          IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend
-          docker buildx build --load \
-            --build-arg VITE_API_URL=${{ secrets.VITE_API_URL }} \
-            -t $IMAGE_TAG \
-            ./client
-
+              IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend
+              docker build -t $IMAGE_TAG ./client
 
       # ✅ Push para o Artifact Registry
       - name: Push Docker image to Artifact Registry
         run: |
-          IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend
-          docker push $IMAGE_TAG
+            IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend
+            docker push $IMAGE_TAG
+
+
 
       # ✅ Deploy no Cloud Run
       - name: Deploy to Cloud Run
