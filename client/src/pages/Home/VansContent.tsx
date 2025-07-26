@@ -18,7 +18,7 @@ export const VansContent = () => {
 
 	const pageCount = Math.ceil(vans.length / ITEMS_PER_PAGE);
 	const startIndex = currentPage * ITEMS_PER_PAGE;
-	const currentItems = vans.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+	const currentItems = vans?.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
 	const handlePageChange = (event: { selected: number }) => {
 		setCurrentPage(event.selected);

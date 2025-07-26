@@ -11,7 +11,14 @@ export const useVans = () => {
 		setLoading(true);
 		api
 			.get("/vans")
-			.then((res) => setVans(res.data))
+			.then((res) => {
+				if (!Array.isArray(res.data)) {
+					console.error("Expected array but got:", res.data);
+					return;
+				}
+
+				setVans(res.data);
+			})
 			.catch((_err) => setError("Failed to load vans"))
 			.finally(() =>
 				setTimeout(() => {
