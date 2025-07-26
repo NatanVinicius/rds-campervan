@@ -17,6 +17,7 @@ export const useVans = () => {
 					return;
 				}
 
+				console.log("🚀 VITE_API_URL", import.meta.env.VITE_API_URL);
 				setVans(res.data);
 			})
 			.catch((_err) => setError("Failed to load vans"))
