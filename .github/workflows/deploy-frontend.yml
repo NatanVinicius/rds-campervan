@@ -35,7 +35,11 @@ jobs:
       - name: Authenticate Docker with Google Artifact Registry
         run: gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev
 
-      # ✅ Build da imagem com VITE_API_URL
+      - name: Set environment variable
+        run: echo "VITE_API_URL=https://www.rdscampervan.co.nz/api" >> .env
+
+
+      # ✅ Build da imagem 
       - name: Build Docker image
         run: |
               IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend

@@ -18,6 +18,9 @@ export const useVans = () => {
 				}
 
 				console.log("🚀 VITE_API_URL", import.meta.env.VITE_API_URL);
+				// biome-ignore lint/style/useTemplate: <explanation>
+				console.log("🚀 API full URL:", api.defaults.baseURL + "/vans");
+
 				setVans(res.data);
 			})
 			.catch((_err) => setError("Failed to load vans"))
