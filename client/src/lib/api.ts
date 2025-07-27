@@ -10,7 +10,7 @@ console.log(
 );
 
 export const api = axios.create({
-	baseURL: import.meta.env.VITE_API_URL || "https://www.rdscampervan.co.nz/api",
+	baseURL: import.meta.env.VITE_API_URL,
 });
 
 api.interceptors.request.use((config) => {
