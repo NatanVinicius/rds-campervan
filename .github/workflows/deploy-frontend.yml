@@ -44,7 +44,7 @@ jobs:
         run: |
             IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/rds-campervan-cloud/campervans-frontend/frontend
             docker build \
-              --build-arg VITE_API_URL=https://www.rdscampervan.co.nz/api \
+              --build-arg VITE_API_URL=${{ secrets.VITE_API_URL }} \
               -t $IMAGE_TAG ./client
 
       # ✅ Push para o Artifact Registry
