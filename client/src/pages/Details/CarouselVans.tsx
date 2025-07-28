@@ -53,7 +53,7 @@ export const CarouselVans = ({ images }: CarouselVansProps) => {
 				className={
 					modalImage
 						? "fixed top-0 left-0 flex items-center justify-center gap-2 h-full w-full z-100000"
-						: "flex items-center justify-center gap-2"
+						: "h-[310px] flex items-center justify-center gap-2 md:h-auto"
 				}
 			>
 				<button type="button" onClick={prevImage}>

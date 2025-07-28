@@ -1,12 +1,7 @@
+import type { filtersType } from "../../hooks/useVans";
+
 type FilterProps = {
-	setFilters: React.Dispatch<
-		React.SetStateAction<{
-			capacity: number;
-			maxPrice: number;
-			sortingBy: string;
-			newOrUsed: string;
-		}>
-	>;
+	setFilters: React.Dispatch<React.SetStateAction<filtersType>>;
 };
 
 export const SearchFilter = ({ setFilters }: FilterProps) => {
@@ -22,7 +17,7 @@ export const SearchFilter = ({ setFilters }: FilterProps) => {
 					id="filters"
 					className="text-sm rounded-lg block w-full p-2.5 bg-[#E2E4E8] border-[#E2E4E8] placeholder-gray-400 text-[#282828]"
 					onChange={handleChange}
-					name="capacity"
+					name="capacityDetail"
 				>
 					<option value="" hidden>
 						Capacity
@@ -41,10 +36,10 @@ export const SearchFilter = ({ setFilters }: FilterProps) => {
 					<option value="" hidden>
 						Max price
 					</option>
-					<option value="10000">Up to $20.000</option>
-					<option value="20000">Up to $40.000</option>
-					<option value="30000">Up to $60.000</option>
-					<option value="40000">Up to $80.000</option>
+					<option value="20000">Up to $20.000</option>
+					<option value="40000">Up to $40.000</option>
+					<option value="60000">Up to $60.000</option>
+					<option value="80000">Up to $80.000</option>
 				</select>
 				<select
 					id="filters"

@@ -11,10 +11,14 @@ export const Header = () => {
 	const toggleMenu = () => setMenuOpen(!menuOpen);
 
 	return (
-		<header className="xl:w-[1100px] mx-auto">
-			<div className="relative flex items-center justify-between w-full p-6 bg-[#E5E7EB] z-1000">
-				<div className="">
-					<img src={bgBlack} alt="logo" className="w-30 md:w-45" />
+		<header className="pl-10 xl:w-[1100px] mx-auto">
+			<div className="relative flex items-center justify-between w-full h-[76px] p-6 bg-[#E5E7EB] z-1000">
+				<div className="h-full flex items-center justify-center">
+					<img
+						src={bgBlack}
+						alt="logo"
+						className="absolute w-[101px] h-[63px]"
+					/>
 				</div>
 				<button
 					type="button"
@@ -46,14 +50,14 @@ export const Header = () => {
 								</span>
 							</p>
 						</li>
-						<li>
+						{/* <li>
 							<p className="text-lg px-2 group relative w-max">
 								<Link to={"/layouts"}>Layouts</Link>
 								<span className="absolute -bottom-1 left-0 w-0 transition-all h-0.5 bg-[#006FFF] group-hover:w-full">
 									{}
 								</span>
 							</p>
-						</li>
+						</li> */}
 						<li>
 							<p className="text-lg px-2 group relative w-max">
 								<Link to={"/contact"}>Contact us</Link>

@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  api:
+    build: ./server
+    container_name: rds-campervan-api-dev
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./server/.env   # Caminho relativo do seu .env local do backend
+    volumes:
+      - ./server:/app          # Código local mapeado pro container
+      - /app/node_modules      # node_modules isolados no container
+      
+    working_dir: /app
+    command: npm run dev       # Deve rodar nodemon/ts-node-dev para hot reload
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+  mongo:
+    image: mongo
+    container_name: rds-campervan-mongo-dev
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  web:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: rds-campervan-web-dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    working_dir: /app
+    command: npm run dev -- --host
+    depends_on:
+      - api
+
+volumes:
+  mongo-data:
