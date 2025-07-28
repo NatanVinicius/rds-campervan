@@ -7,6 +7,7 @@ import { CarouselVans } from "./CarouselVans";
 import { Specifications } from "./Specification";
 import selfContainedImg from "../../assets/self-contained-img.png";
 import type { VanType } from "../../types/VanType";
+import { formatToNZD } from "../../hooks/formatToNZD";
 
 export const DetailsPage = () => {
 	const [van, setVan] = useState<VanType | null>(null);
@@ -26,7 +27,7 @@ export const DetailsPage = () => {
 				<div className="flex justify-between items-center w-full">
 					<div className="flex flex-col gap-2 text-2xl font-semibold">
 						<h1>{van?.name}</h1>
-						<h2 className="text-[#006FFF]"> ${van?.price}</h2>
+						<h2 className="text-[#006FFF]"> {formatToNZD(van?.price ?? 0)}</h2>
 					</div>
 					<div className="pr-4">
 						<Link to={"/"}>Return</Link>

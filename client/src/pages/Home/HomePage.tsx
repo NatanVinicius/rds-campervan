@@ -4,13 +4,14 @@ import { SearchFilter } from "./SearchFilter";
 import { useState } from "react";
 import { VansContent } from "./VansContent";
 import { Footer } from "../../components/Footer";
+import type { filtersType } from "../../hooks/useVans";
 
 export const HomePage = () => {
-	const [_filters, setFilters] = useState({
-		capacity: 0,
-		maxPrice: 0,
-		sortingBy: "",
+	const [filters, setFilters] = useState<filtersType>({
+		capacityDetail: "",
+		maxPrice: "",
 		newOrUsed: "",
+		sortingBy: "",
 	});
 
 	return (
@@ -19,7 +20,7 @@ export const HomePage = () => {
 			<HeroSection />
 			<main className="py-6 xl:w-[1100px] mx-auto">
 				<SearchFilter setFilters={setFilters} />
-				<VansContent />
+				<VansContent filters={filters} />
 			</main>
 			<Footer />
 		</div>

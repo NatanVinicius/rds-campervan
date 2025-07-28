@@ -1,13 +1,6 @@
 import type { Request, Response } from "express";
 import { Van } from "../models/Van";
 
-type filterProps = {
-	capacityDetail?: number;
-	maxPrice?: number;
-	sortingBy?: string;
-	newOrUsed?: string;
-};
-
 export const listVans = async (req: Request, res: Response) => {
 	try {
 		const query: Record<string, unknown> = {};
@@ -22,7 +15,7 @@ export const listVans = async (req: Request, res: Response) => {
 			query.price = { $lte: Number(maxPrice) };
 		}
 
-		if (newOrUsed === "new" || newOrUsed === "used") {
+		if (newOrUsed === "New" || newOrUsed === "Used") {
 			query.newOrUsed = newOrUsed;
 		}
 

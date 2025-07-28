@@ -5,14 +5,19 @@ import ReactPaginate from "react-paginate";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useVans } from "../../hooks/useVans";
+import { useVans, type filtersType } from "../../hooks/useVans";
 import type { VanType } from "../../types/VanType";
 import { LoadingSpin } from "../../components/LoadingSpin";
+import { formatToNZD } from "../../hooks/formatToNZD";
 
 const ITEMS_PER_PAGE = 9;
 
-export const VansContent = () => {
-	const { vans, loading } = useVans();
+interface vansContentProps {
+	filters: filtersType;
+}
+
+export const VansContent = ({ filters }: vansContentProps) => {
+	const { vans, loading } = useVans(filters);
 
 	const [currentPage, setCurrentPage] = useState(0);
 
@@ -78,6 +83,9 @@ export const VansContent = () => {
 												<IoIosPeople />
 											</span>
 											<p>{van.details.capacityDetail}</p>
+										</div>
+										<div className=" text-xl text-[#006FFF] font-semibold">
+											<p>{formatToNZD(van.price)}</p>
 										</div>
 									</div>
 								</div>

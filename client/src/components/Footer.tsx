@@ -8,19 +8,31 @@ export const Footer = () => {
 		<footer className="w-full bg-[#282828] py-10">
 			<div className="flex flex-col items-center justify-center lg:flex-row lg:w-[1200px] lg:mx-auto lg:justify-between">
 				<div className="">
-					<img src={logo} alt="" className="lg:w-[400px]" />
-					<div className="flex justify-between text-white mt-2 lg:justify-around">
+					<img src={logo} alt="" className="w-[300px] lg:w-[400px]" />
+					<div className="flex justify-between text-white mt-4 lg:justify-around">
 						<p className=" flex items-center gap-2">
 							<span>
 								<FaInstagram />
 							</span>{" "}
-							Instagram
+							<a
+								href="https://www.instagram.com/rds_campervan_/?hl=en"
+								// biome-ignore lint/a11y/noBlankTarget: <explanation>
+								target="_blank"
+							>
+								Instagram
+							</a>
 						</p>
 						<p className=" flex items-center justify-end gap-2">
 							<span>
 								<FaFacebookSquare />
 							</span>{" "}
-							Facebook
+							<a
+								href="https://www.facebook.com/people/RDS-Campervans/100084103864229"
+								// biome-ignore lint/a11y/noBlankTarget: <explanation>
+								target="_blank"
+							>
+								Facebook
+							</a>
 						</p>
 					</div>
 				</div>

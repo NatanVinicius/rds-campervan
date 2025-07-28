@@ -2,25 +2,40 @@ import { useEffect, useState } from "react";
 import { api } from "../lib/api";
 import type { VanType } from "../types/VanType";
 
-export const useVans = () => {
+export type filtersType = {
+	capacityDetail: string;
+	maxPrice: string;
+	newOrUsed: string;
+	sortingBy: string;
+};
+
+export const useVans = (filters?: filtersType) => {
 	const [vans, setVans] = useState<VanType[] | []>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
+	console.log(filters);
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		fetchVans();
+	}, [filters]);
+
+	useEffect(() => {
+		console.log(vans);
+	}, [vans]);
 
 	const fetchVans = async () => {
 		setLoading(true);
 		api
-			.get("/vans")
+			.get("/vans", {
+				params: {
+					...filters,
+				},
+			})
 			.then((res) => {
 				if (!Array.isArray(res.data)) {
 					console.error("Expected array but got:", res.data);
 					return;
 				}
-
-				console.log("🚀 VITE_API_URL", import.meta.env.VITE_API_URL);
-				// biome-ignore lint/style/useTemplate: <explanation>
-				console.log("🚀 API full URL:", api.defaults.baseURL + "/vans");
-
 				setVans(res.data);
 			})
 			.catch((_err) => setError("Failed to load vans"))
