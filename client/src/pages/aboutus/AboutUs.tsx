@@ -10,7 +10,6 @@ export const AboutUs = () => {
 	return (
 		<>
 			<section className="w-full bg-[url('/src/assets/bg-aboutus.jpg')] bg-cover bg-center h-[230px] text-white lg:h-[450px] lg:bg-[center_top_-120px] xl:bg-[center_top_-280px]  2xl:h-[650px]">
-				{/* Overlay escura sobre a imagem */}
 				<div className="relative w-full h-full bg-black/80 z-10">
 					<div className="w-full h-full flex items-center justify-start max-w-[1200px] mx-auto py-30 px-6 ">
 						<TextType
