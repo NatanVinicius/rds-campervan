@@ -88,7 +88,7 @@ export const Painel = () => {
 		<div className="relative w-full h-full flex flex-col items-center justify-center">
 			<div className="w-full flex flex-col mx-auto py-4 px-2 md:w-[800px]">
 				<header className="flex flex-col gap-2 items-center">
-					<img src={logo} alt="" />
+					<img src={logo} alt="" className="w-40" />
 					<p className="text-2xl">Admin Control</p>
 				</header>
 				<div className="w-full flex justify-end my-6">

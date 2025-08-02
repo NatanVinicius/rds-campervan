@@ -1,4 +1,3 @@
-import { Header } from "../../components/Header";
 import { HeroSection } from "./HeroSection";
 import { SearchFilter } from "./SearchFilter";
 import { useState } from "react";
@@ -15,8 +14,7 @@ export const HomePage = () => {
 	});
 
 	return (
-		<div>
-			<Header />
+		<div className="relative">
 			<HeroSection />
 			<main className="py-6 xl:w-[1100px] mx-auto">
 				<SearchFilter setFilters={setFilters} />

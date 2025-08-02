@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
 	return (
-		<footer className="w-full bg-[#282828] py-10">
+		<footer className="w-full bg-[#282828] pt-10 pb-2">
 			<div className="flex flex-col items-center justify-center lg:flex-row lg:w-[1200px] lg:mx-auto lg:justify-between">
 				<div className="">
-					<img src={logo} alt="" className="w-[300px] lg:w-[400px]" />
+					<img src={logo} alt="" className="w-60" />
 					<div className="flex justify-between text-white mt-4 lg:justify-around">
 						<p className=" flex items-center gap-2">
 							<span>
@@ -93,8 +93,8 @@ export const Footer = () => {
 					</nav>
 				</div>
 			</div>
-			<div className="mt-6 border-t-2 border-white">
-				<p className="mt-6 text-white text-center">
+			<div className="mt-10">
+				<p className=" text-white text-sm text-center">
 					Copyright 2025 RDS Campervan ltd.
 				</p>
 			</div>

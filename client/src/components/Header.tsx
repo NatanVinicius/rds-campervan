@@ -11,14 +11,10 @@ export const Header = () => {
 	const toggleMenu = () => setMenuOpen(!menuOpen);
 
 	return (
-		<header className="pl-10 xl:w-[1100px] mx-auto">
-			<div className="relative flex items-center justify-between w-full h-[76px] p-6 bg-[#E5E7EB] z-1000">
-				<div className="h-full flex items-center justify-center">
-					<img
-						src={bgBlack}
-						alt="logo"
-						className="absolute w-[101px] h-[63px]"
-					/>
+		<header className="xl:w-[1100px] mx-auto">
+			<div className="relative flex items-center justify-end w-full h-[76px] p-6 z-1000">
+				<div className="absolute left-0 h-full flex items-center justify-center pl-10">
+					<img src={bgBlack} alt="logo" className="w-[70px] h-[40px]" />
 				</div>
 				<button
 					type="button"
@@ -95,7 +91,11 @@ export const Header = () => {
 									<span className="absolute left-6">
 										<FaArrowAltCircleRight className="text-[#006FFF]" />
 									</span>
-									<Link to={"/"} className="text-center" onClick={toggleMenu}>
+									<Link
+										to={"/aboutus"}
+										className="text-center"
+										onClick={toggleMenu}
+									>
 										About us
 									</Link>
 								</li>

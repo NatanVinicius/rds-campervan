@@ -6,15 +6,20 @@ import { ScrollToTop } from "../utils/ScrollToTop";
 import { Admin } from "../pages/Admin/Admin";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 import { Painel } from "../pages/Admin/Painel";
+import { AboutUs } from "../pages/aboutus/AboutUs";
+import { Header } from "../components/Header";
 
 export const AppRoutes = () => {
 	return (
 		<>
 			<ScrollToTop />
+
+			<Header />
 			<Routes>
 				<Route path="/" element={<HomePage />} />
 				<Route path="/details" element={<DetailsPage />} />
 				<Route path="/contact" element={<Contact />} />
+				<Route path="/aboutus" element={<AboutUs />} />
 				<Route path="/admin" element={<Admin />} />
 				<Route
 					path="/painel"
