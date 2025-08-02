@@ -1,0 +1,5 @@
+project_id 
+region 
+backend_image 
+mongo_user     
+mongo_password 

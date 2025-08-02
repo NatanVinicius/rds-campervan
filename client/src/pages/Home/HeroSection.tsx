@@ -6,10 +6,10 @@ export const HeroSection = () => {
 			{/* Overlay escura sobre a imagem */}
 			<div className="w-full h-full bg-black/70 z-10">
 				<div className="flex flex-col justify-center max-w-[1200px] h-full mx-auto py-20 px-6">
-					<h1 className="text-3xl font-bold sm:text-5xl">
+					<h1>
 						<SplitText
 							text="Welcome"
-							className="text-3xl font-bold tracking-wider md:text-6xl"
+							className="text-xl w-60 font-bold tracking-wider lg:text-4xl lg:w-120"
 							delay={100}
 							duration={0.6}
 							ease="power3.out"
@@ -20,10 +20,10 @@ export const HeroSection = () => {
 							rootMargin="-100px"
 						/>
 					</h1>
-					<h2 className="text-xl sm:text-3xl mt-4">
+					<h2>
 						<SplitText
 							text="Your trip start here!"
-							className="text-3xl font-bold tracking-tight md:text-6xl"
+							className="text-xl w-60 font-bold tracking-tight lg:text-4xl lg:w-120"
 							delay={100}
 							duration={0.6}
 							ease="power3.out"
