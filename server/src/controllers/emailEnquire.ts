@@ -35,7 +35,7 @@ export const emailEnquire = async (req: Request, res: Response) => {
 						},
 						To: [
 							{
-								Email: "thalitacristianefabri@gmail.com", // Email da empresa que vai receber
+								Email: "rdstrading7@gmail.com", // Email da empresa que vai receber
 								Name: name,
 							},
 						],

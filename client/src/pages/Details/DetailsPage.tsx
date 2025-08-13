@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -22,7 +21,6 @@ export const DetailsPage = () => {
 
 	return (
 		<>
-			<Header />
 			<div className=" max-w-[1100px] mx-auto px-6">
 				<div className="flex justify-between items-center w-full">
 					<div className="flex flex-col gap-2 text-2xl font-semibold">
