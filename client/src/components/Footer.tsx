@@ -43,7 +43,7 @@ export const Footer = () => {
 					<p>175, Russel Road</p>
 					<p>Manurewa</p>
 					<p>Auckland, 2013</p>
-					<p>027 384 5560</p>
+					<a href="tel:+64 27 500 2070">+64 27 500 2070</a>
 				</div>
 				<div className="mx-6 mt-6">
 					<nav>
@@ -71,17 +71,7 @@ export const Footer = () => {
 							</li>
 							<li>
 								<p className="text-lg px-2 py-3 group relative w-max">
-									<Link to={"/layouts"} className="text-center">
-										Layouts
-									</Link>
-									<span className="absolute top-11 left-0 w-0 transition-all h-0.5 bg-[#006FFF] group-hover:w-full">
-										{}
-									</span>
-								</p>
-							</li>
-							<li>
-								<p className="text-lg px-2 py-3 group relative w-max">
-									<Link to={"/contactus"} className="text-center">
+									<Link to={"/contact"} className="text-center">
 										Contact us
 									</Link>
 									<span className="absolute top-11 left-0 w-0 transition-all h-0.5 bg-[#006FFF] group-hover:w-full">

@@ -12,7 +12,7 @@ export const Header = () => {
 
 	return (
 		<header className="xl:w-[1100px] mx-auto">
-			<div className="relative flex items-center justify-end w-full h-[76px] p-6 z-1000">
+			<div className="fixed top-0 left-0 bg-[#E5E7EB] flex items-center justify-end w-full h-[76px] p-6 z-1000 lg:relative">
 				<div className="absolute left-0 h-full flex items-center justify-center pl-10">
 					<img src={bgBlack} alt="logo" className="w-[70px] h-[40px]" />
 				</div>

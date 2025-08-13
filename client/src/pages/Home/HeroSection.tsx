@@ -2,7 +2,7 @@ import SplitText from "../../components/motion/SplitText";
 
 export const HeroSection = () => {
 	return (
-		<section className="w-full bg-[url('/src/assets/heroBG.jpg')] bg-cover bg-center text-white lg:h-[450px] 2xl:h-[650px]">
+		<section className="w-full mt-[76px] bg-[url('/src/assets/heroBG.jpg')] bg-cover bg-center text-white lg:h-[450px] lg:mt-0 2xl:h-[650px]">
 			{/* Overlay escura sobre a imagem */}
 			<div className="w-full h-full bg-black/70 z-10">
 				<div className="flex flex-col justify-center max-w-[1200px] h-full mx-auto py-20 px-6">

@@ -14,27 +14,33 @@ export const HeroDetails = () => {
 				<div className="flex flex-col items-center justify-center gap-4 bg-white rounded-2xl text-[#282828] p-4">
 					<GiHouseKeys className="text-6xl" />
 					<p>If you wish purchase a campervan</p>
-					<a href="tel:+640273847740" className="text-[#006FFF] font-semibold">
-						027 384 7740
-					</a>
 					<a
-						href="mailto:sales@rdscampervan.co.nz"
+						href="tel:+64 27 500 2070"
 						className="text-[#006FFF] font-semibold"
 					>
-						sales@rdscampervan.co.nz
+						+64 27 500 2070
+					</a>
+					<a
+						href="mailto:rdstrading7@gmail.com"
+						className="text-[#006FFF] font-semibold"
+					>
+						rdstrading7@gmail.com
 					</a>
 				</div>
 				<div className="flex flex-col items-center justify-center gap-4 bg-white rounded-2xl text-[#282828] p-4">
 					<GiSurferVan className="text-6xl" />
 					<p>If you already own a campervan </p>
-					<a href="tel:+640273847740" className="text-[#006FFF] font-semibold">
-						027 384 7740
-					</a>
 					<a
-						href="mailto:sales@rdscampervan.co.nz"
+						href="tel:+64 27 500 2070"
 						className="text-[#006FFF] font-semibold"
 					>
-						sales@rdscampervan.co.nz
+						+64 27 500 2070
+					</a>
+					<a
+						href="mailto:rdstrading7@gmail.com"
+						className="text-[#006FFF] font-semibold"
+					>
+						rdstrading7@gmail.com
 					</a>
 				</div>
 			</div>

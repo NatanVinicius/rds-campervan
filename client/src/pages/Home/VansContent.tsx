@@ -43,24 +43,26 @@ export const VansContent = ({ filters }: vansContentProps) => {
 				</div>
 			) : (
 				<div>
-					<section className="p-6 flex flex-col gap-10 lg:grid grid-cols-2 xl:grid-cols-3">
+					<section className="p-6 flex flex-col gap-10 lg:grid grid-cols-2 xl:gap-4 xl:grid-cols-3">
 						{currentItems.map((van, index) => (
 							<div
 								// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 								key={index}
 								className="bg-[#f5f5f5] shadow-md rounded-2xl hover:scale-101 hover:shadow-2xl duration-400"
 							>
-								<img
-									src={
-										typeof van.coverImage === "string"
-											? van.coverImage
-											: van.coverImage
-												? URL.createObjectURL(van.coverImage)
-												: undefined
-									}
-									alt=""
-									className="w-full h-[260px] rounded-t-2xl"
-								/>
+								<div className="h-50 flex items-center justify-center">
+									<img
+										src={
+											typeof van.coverImage === "string"
+												? van.coverImage
+												: van.coverImage
+													? URL.createObjectURL(van.coverImage)
+													: undefined
+										}
+										alt=""
+										className="h-full w-full object-contain rounded-t-2xl"
+									/>
+								</div>
 								<div className="px-2 py-4 text-[#282828]">
 									<p className="text-2xl text-black font-semibold">
 										{van.name}
